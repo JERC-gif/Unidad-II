@@ -1,3 +1,9 @@
+import 'package:donut_app_2c_ruiz/tabs/burger_tab.dart';
+import 'package:donut_app_2c_ruiz/tabs/donut_tab.dart';
+import 'package:donut_app_2c_ruiz/tabs/pancakes_tab.dart';
+import 'package:donut_app_2c_ruiz/tabs/pizza_tab.dart';
+import 'package:donut_app_2c_ruiz/tabs/smoothie_tab.dart';
+import 'package:donut_app_2c_ruiz/utils/my_tab.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,60 +14,81 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Widget>  myTabs = [
+    const MyTab(iconPath: 'lib/icons/donut.png'),
+    const MyTab(iconPath: 'lib/icons/burger.png'),
+    const MyTab(iconPath: 'lib/icons/smoothie.png'),
+    const MyTab(iconPath: 'lib/icons/pancakes.png'),
+    const MyTab(iconPath: 'lib/icons/pizza.png')
+    ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar( 
-        backgroundColor: Colors.transparent,
-        //Icono Izquierdo
-        leading: Icon(
-        Icons.menu,
-        color: Colors.grey[800]
-        ),
-        //Icono Derecho
-        actions:const [
-          Padding(
-            padding: EdgeInsets.only(right: 24.0),
-            child: Icon(Icons.person),
-          )
-        ],
-      ),
-      body: Column(
-        children: [
-      //Texto principal
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 36, vertical: 18),
-          child: Row(
-            children: [
-              Text("I wan to  ", 
-              style: TextStyle(
-                //Tipografia 
-                fontFamily: "ComicStrip" ,
-                //Tamaño de letra
-                fontSize: 34
-              )
-              ),
-              Text("Eat", 
-              style: TextStyle(
-                //Tipografia 
-                fontFamily: "ComicStrip" ,
-                //Tamaño de letra
-                fontSize: 32,
-                //Negritas
-                fontWeight: FontWeight.bold,
-                //Subrayado
-                decoration: TextDecoration.underline
-              ),)
-            ],
+    return DefaultTabController(
+      length: myTabs.length,
+      child: Scaffold(
+        appBar: AppBar( 
+          backgroundColor: Colors.transparent,
+          //Icono Izquierdo
+          leading: Icon(
+          Icons.menu,
+          color: Colors.grey[800]
           ),
+          //Icono Derecho
+          actions:const [
+            Padding(
+              padding: EdgeInsets.only(right: 24.0),
+              child: Icon(Icons.person),
+            )
+          ],
         ),
-
-
-      //Pestaña (TaBar)
-
-      //Contenido(Cart)
-
-        ],)
+        body: Column(
+          children: [
+        //Texto principal
+         const Padding(
+            padding:  EdgeInsets.symmetric(horizontal: 36, vertical: 18),
+            child: Row(
+              children: [
+                Text("I want to  ", 
+                style: TextStyle(
+                  //Tipografia 
+                  fontFamily: "ComicStrip" ,
+                  //Tamaño de letra
+                  fontSize: 34
+                )
+                ),
+                Text("Eat", 
+                style: TextStyle(
+                  //Tipografia 
+                  fontFamily: "ComicStrip" ,
+                  //Tamaño de letra
+                  fontSize: 32,
+                  //Negritas
+                  fontWeight: FontWeight.bold,
+                  //Subrayado
+                  decoration: TextDecoration.underline
+                ),)
+              ],
+            ),
+          ),
+      
+      
+        //Pestaña (TaBar)
+        TabBar(tabs: myTabs),
+        //Contenido de pestañas (TabarView)
+        Expanded(
+          child: TabBarView(children: [
+            DonutTab(),
+            BurgerTab(),
+            SmoothieTab(),
+            PancakesTab(),
+            PizzaTab()
+          ]),
+        )
+        //Contenido(Cart)
+      
+          ],)
+      ),
     );
   }
 }
