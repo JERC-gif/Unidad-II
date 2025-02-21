@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Uber Eats 2',
       theme: ThemeData(
         tabBarTheme: const TabBarTheme(indicatorColor: Colors.pink),
         
