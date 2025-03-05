@@ -1,3 +1,4 @@
+import 'package:donut_app_2c_ruiz/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class DonutTab extends StatelessWidget {
@@ -23,13 +24,14 @@ class DonutTab extends StatelessWidget {
       // Prepa 1. como se organizaran los elementos
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         //Cuantas columnas 
-        crossAxisCount: 2,
-        
+        crossAxisCount: 2
+        //Relacion de aspecto
+        ,childAspectRatio: 1/1.5,
         
       ),
       itemBuilder: (context, index){
         //Cada elemento individual
-        return DonutTitle(
+        return DonutTile(
         donutFlavor: donutsOnSale[index][0],
         donutPrice: donutsOnSale[index][1],
         donutColor: donutsOnSale[index][2],
