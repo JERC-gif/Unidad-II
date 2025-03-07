@@ -5,9 +5,10 @@ class DonutTile extends StatelessWidget {
   final String donutPrice;
   //Es dynamic porque puede ser de tipo COLOR
   final dynamic donutColor;
-  final String imageName;
+  final String imageName;  
+  final String donutMark;
 
-  const DonutTile({super.key, required this.donutFlavor, required this.donutPrice, this.donutColor, required this.imageName});
+  const DonutTile({super.key, required this.donutFlavor, required this.donutPrice, this.donutColor, required this.imageName, required this.donutMark});
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +52,37 @@ class DonutTile extends StatelessWidget {
             ),
             child: Image.asset(imageName),
           ),
-
           //Donut Flavor Text
-
-          //Boutton
-        ],),
+          Text(donutFlavor,
+              style: 
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+              //Texto con espacio
+              const SizedBox(
+                height: 4,
+              ),
+              Text(donutMark,
+              style: 
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),),
+              //Texto con espacio
+              const SizedBox(
+                height: 4,
+              ),
+              Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16), // Espaciado lateral
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween, // Elementos en las esquinas
+                children: [
+                  Icon(Icons.favorite_border, color: Colors.grey.shade700), // Corazón a la izquierda
+                  const Text(
+                    'Add',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
+                  ), // "Add" a la derecha
+                ],
+              ),
+            ),
+            const SizedBox(height: 12), // Espaciado final
+          ],
+        ),
       ),
     );
   }
