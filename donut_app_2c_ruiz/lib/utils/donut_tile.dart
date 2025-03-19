@@ -59,7 +59,7 @@ class DonutTile extends StatelessWidget {
               //Texto con espacio
               const SizedBox(
                 height: 4,
-              ),
+              ),  
               Text(donutMark,
               style: 
                 const TextStyle(fontWeight: FontWeight.bold, fontSize: 10),),
