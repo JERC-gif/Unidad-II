@@ -1,88 +1,103 @@
-import 'package:donut_app_2c_ruiz/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
+import '../utils/donut_tile.dart';
 
 class BurgerTab extends StatelessWidget {
-  //Lista de donas
+  final Function(double) onAdd; // Callback para agregar al carrito
+
   final List donutsOnSale = [
-    //[donutFlavor, donutStore, donutPrice, donutColor, imageName]
+    //[donutFlavor,donutPrice,donutColor,ImageName]
+
     [
-      "Ice Cream",
-      "Krispy Cream",
+      "Burger Spot",
+      " Krispy Kreme",
       "36",
       Colors.blue,
-      "lib/images/icecream_donut.png"
+      "lib/images/Hamburguesa 1.png"
     ],
+
     [
-      "Strawberry",
+      "Burger Box",
       "Dunkin Donuts",
       "45",
       Colors.red,
-      "lib/images/strawberry_donut.png"
+      "lib/images/Hamburguesa 2.png"
     ],
+
     [
-      "Grape Ape",
-      "Krispy Cream",
+      "Burger House",
+      "Aurrerá",
       "84",
       Colors.purple,
-      "lib/images/grape_donut.png"
+      "lib/images/Hamburguesa 3.png"
     ],
+
     [
-      "Choco",
-      "Dunkin Donuts",
+      "Grill Master",
+      "Costco",
       "95",
       Colors.brown,
-      "lib/images/chocolate_donut.png"
+      "lib/images/Hamburguesa 4.png"
     ],
+
     [
-      "Ice Cream",
-      "Krispy Cream",
+      "Burger Heaven",
+      " Krispy Kreme",
       "36",
       Colors.blue,
-      "lib/images/icecream_donut.png"
+      "lib/images/Hamburguesa 5.png"
     ],
+
     [
-      "Strawberry",
+      "Burgerlicious",
       "Dunkin Donuts",
       "45",
       Colors.red,
-      "lib/images/strawberry_donut.png"
+      "lib/images/Hamburguesa 6.png"
     ],
+
     [
-      "Grape Ape",
-      "Krispy Cream",
+      "Burger Express",
+      "Aurrerá",
       "84",
       Colors.purple,
-      "lib/images/grape_donut.png"
+      "lib/images/Hamburguesa 7.png"
     ],
+
     [
-      "Choco",
-      "Dunkin Donuts",
+      "Burger Bliss",
+      "Costco",
       "95",
       Colors.brown,
-      "lib/images/chocolate_donut.png"
+      "lib/images/Hamburguesa 8.png"
     ],
   ];
-  BurgerTab({super.key});
-
+  BurgerTab({super.key, required this.onAdd});
   @override
   Widget build(BuildContext context) {
+    //Widget para usar cuadicula
     return GridView.builder(
-        //Cuantos elementos tiene
-        itemCount: (donutsOnSale.length),
-        padding: const EdgeInsets.all(12),
-        //Encargado de organizar la cuadrícula
+        //cuantos elementos hay en la regilla
+        itemCount: donutsOnSale.length,
+        //espacio entre texto
+        padding: EdgeInsets.all(12),
+        //Prepa 1. como se distuibiran los elementos
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //Determinar número de columnas
+            //crosaxis en una fila el eje crusado es el vertical
             crossAxisCount: 2,
-            childAspectRatio: 1 / 1.5),
+            //relacion de aspecto(Proporcion)
+            childAspectRatio: 1 / 1.6),
         itemBuilder: (context, index) {
-          //Elemento individual de la cuadrícula
+          //cada elemento individual
           return DonutTile(
             donutFlavor: donutsOnSale[index][0],
-            donutMark: donutsOnSale[index][1],
+            donutStore: donutsOnSale[index][1],
             donutPrice: donutsOnSale[index][2],
             donutColor: donutsOnSale[index][3],
             imageName: donutsOnSale[index][4],
+            onAdd: () {
+              // Llama a la función de callback y pasa el precio
+              onAdd(double.parse(donutsOnSale[index][2]));
+            },
           );
         });
   }

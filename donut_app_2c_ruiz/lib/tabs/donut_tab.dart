@@ -2,16 +2,19 @@ import 'package:donut_app_2c_ruiz/utils/donut_tile.dart';
 import 'package:flutter/material.dart';
 
 class DonutTab extends StatelessWidget {
-  //Lista de donas
+  final Function(double) onAdd; // Callback para agregar al carrito
+
+  // Lista de donas
   final List donutsOnSale = [
-    //[donutFlavor, donutStore, donutPrice, donutColor, imageName]
+    // [donutFlavor, donutPrice, donutColor, imageName]
     [
       "Ice Cream",
-      "Krispy Cream",
+      " Krispy Kreme",
       "36",
       Colors.blue,
       "lib/images/icecream_donut.png"
     ],
+
     [
       "Strawberry",
       "Dunkin Donuts",
@@ -19,71 +22,65 @@ class DonutTab extends StatelessWidget {
       Colors.red,
       "lib/images/strawberry_donut.png"
     ],
+
+    ["Grape Ape", "Aurrerá", "84", Colors.purple, "lib/images/grape_donut.png"],
+
+    ["Choco", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
+
     [
-      "Grape Ape",
-      "Krispy Cream",
-      "84",
-      Colors.purple,
-      "lib/images/grape_donut.png"
-    ],
-    [
-      "Choco",
-      "Dunkin Donuts",
-      "95",
-      Colors.brown,
-      "lib/images/chocolate_donut.png"
-    ],
-    [
-      "Ice Cream",
-      "Krispy Cream",
+      "Marzipan",
+      " Krispy Kreme",
       "36",
       Colors.blue,
       "lib/images/icecream_donut.png"
     ],
+
     [
-      "Strawberry",
+      "Mamey",
       "Dunkin Donuts",
       "45",
       Colors.red,
       "lib/images/strawberry_donut.png"
     ],
+
     [
-      "Grape Ape",
-      "Krispy Cream",
+      "Blackberry",
+      "Aurrerá",
       "84",
       Colors.purple,
       "lib/images/grape_donut.png"
     ],
-    [
-      "Choco",
-      "Dunkin Donuts",
-      "95",
-      Colors.brown,
-      "lib/images/chocolate_donut.png"
-    ],
+
+    ["Nutella", "Costco", "95", Colors.brown, "lib/images/chocolate_donut.png"],
   ];
-  DonutTab({super.key});
+
+  // Constructor que recibe la función de callback
+  DonutTab({super.key, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
+    // Widget para usar cuadrícula
     return GridView.builder(
-        //Cuantos elementos tiene
-        itemCount: (donutsOnSale.length),
-        padding: const EdgeInsets.all(12),
-        //Encargado de organizar la cuadrícula
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //Determinar número de columnas
-            crossAxisCount: 2,
-            childAspectRatio: 1 / 1.5),
-        itemBuilder: (context, index) {
-          //Elemento individual de la cuadrícula
-          return DonutTile(
-            donutFlavor: donutsOnSale[index][0],
-            donutMark: donutsOnSale[index][1],
-            donutPrice: donutsOnSale[index][2],
-            donutColor: donutsOnSale[index][3],
-            imageName: donutsOnSale[index][4],
-          );
-        });
+      itemCount: donutsOnSale.length,
+      padding: EdgeInsets.all(12),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1 / 1.6,
+      ),
+      itemBuilder: (context, index) {
+        // Cada elemento individual
+        return DonutTile(
+          donutFlavor: donutsOnSale[index][0],
+          donutStore: donutsOnSale[index][1],
+          donutPrice: donutsOnSale[index][2],
+          donutColor: donutsOnSale[index][3],
+          imageName: donutsOnSale[index][4],
+          onAdd: () {
+            // Llama a la función de callback y pasa el precio
+            onAdd(double.parse(donutsOnSale[index][2]));
+          },
+        );
+      },
+    );
   }
 }
